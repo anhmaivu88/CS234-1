@@ -7,7 +7,7 @@ from ib.ext.TickType import TickType as tt
 import pdb
 
 def error_handler(msg):
-    print (msg)
+    print(msg)
 
 new_symbolinput = ['CANFINHOM', 'KSCL', 'AJP', 'GRUH', 'GREENPLY', 'GRANULES', 'SBIN', 'SHILPAMED', 'SHEMAROO', 'TCS', 'TITAN', 'TORNTPHAR', 'TORNTPOWE', 'SHARONBIO', 'MANAPPURA', 'MAYURUNIQ', 'MPSLTD', 'MUTHOOTFI', 'ATULAUTO', 'AVANTIFEE']
 #for symbol
@@ -55,7 +55,7 @@ tws.connect()
 
 symbol_id = 0
 for i in new_symbolinput:
-	print i
+	print(i)
 	c = Contract()
 	c.m_symbol = i
 	c.m_secType = "IND"
@@ -80,7 +80,7 @@ for i in new_symbolinput:
 
 	symbol_id += 1
 
-print dataDownload
-print 'All done'
+print(dataDownload)
+print('All done')
 
 tws.disconnect()

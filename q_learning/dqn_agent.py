@@ -51,10 +51,10 @@ class Agent:
                     self.epsilon = 0.1
                 eps = self.epsilon
             else:  # Initial Exploation Phase
-                print "Initial Exploration : %d/%d steps" % (self.time, self.DQN.initial_exploration)
+                print("Initial Exploration : %d/%d steps" % (self.time, self.DQN.initial_exploration))
                 eps = 1.0
         else:  # Evaluation
-                print "Policy is Frozen"
+                print("Policy is Frozen")
                 eps = 0.05
 
        
@@ -66,11 +66,11 @@ class Agent:
             self.DQN.experienceReplay(self.time)
 
         if self.DQN.initial_exploration < self.time and np.mod(self.time, self.DQN.target_model_update_freq) == 0:
-            print "########### MODEL UPDATED ######################"
+            print("########### MODEL UPDATED ######################")
             self.DQN.target_model_update()
 
         # Simple text based visualization
-        print ' Time Step %d /   ACTION  %d  /   REWARD %.1f   / EPSILON  %.6f  /   Q_max  %3f' % (self.time, self.DQN.action_to_index(action), np.sign(reward), eps, np.max(Q_now.get()))
+        print(' Time Step %d /   ACTION  %d  /   REWARD %.1f   / EPSILON  %.6f  /   Q_max  %3f' % (self.time, self.DQN.action_to_index(action), np.sign(reward), eps, np.max(Q_now.get())))
 
         # Updates for next step
         self.last_observation = observation
@@ -91,7 +91,7 @@ class Agent:
             self.DQN.experienceReplay(self.time)
 
         # Simple text based visualization
-        print '  REWARD %.1f   / EPSILON  %.5f' % (np.sign(reward), self.epsilon)
+        print('  REWARD %.1f   / EPSILON  %.5f' % (np.sign(reward), self.epsilon))
 
         # Time count
         if not self.policyFrozen:

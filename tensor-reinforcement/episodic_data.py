@@ -43,7 +43,7 @@ def prepare_data(path):
         temp = [data[2], data[3], data[4], data[5], data[8]]
         average_dataset.append(temp)
         if index % 1000 == 13:
-            print index, len(average_dataset)
+            print(index, len(average_dataset))
         # print(index)
         # print(len(average_dataset))
         if index > moving_average_number:
@@ -113,7 +113,7 @@ def data_average_price(data_dict, data):
     key = list_md5_string_value(data)
     value = data_dict.get(key)
     if value == None:
-        print "xfguo: not found value for key:", key, ", data: ", data
+        print("xfguo: not found value for key:", key, ", data: ", data)
     return value[-1]
 
 
@@ -123,7 +123,7 @@ def make_supervised_data(data, data_dict):
         i = 0
         for episode in data:
             if i % 1000 == 13:
-                print i
+                print(i)
             i += 1
             supervised_data.append(episode_supervised_data(episode, data_dict))
         with open("supervised_data.pkl", "wb") as myFile:

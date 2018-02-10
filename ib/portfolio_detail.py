@@ -13,10 +13,10 @@ class IB_API:
 
 	def process_messages(self, msg):
 		if msg.typeName == "updatePortfolio":
-			print msg
+			print()
 	
 	def get_account_updates(self):
-		print "Calling Portfolio"
+		print("Calling Portfolio")
 		self.connection.reqAccountUpdates(1, '')
 		sleep(10)
  

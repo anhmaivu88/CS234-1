@@ -2,6 +2,6 @@
 **/*.ipynb
 **/*.pkl
 **/*.pyc
-
+.vscode
 tensor-reinforcement/logs/**
 tensor-reinforcement/saved_networks/**

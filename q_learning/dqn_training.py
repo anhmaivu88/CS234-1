@@ -27,13 +27,13 @@ class DQN_class:
         self.enable_controller = enable_controller  # Default setting : "Pong"
         self.input_vector_length = input_vector_length
 
-        print "Initializing DQN..."
+        print("Initializing DQN...")
 #   Initialization for Chainer 1.1.0 or older.
 #        print "CUDA init"
 #        cuda.init()
         
         #inputs --> 5 * 14 (with 10 temporality) + 5 (of last one hour) + 5 (of last 24 hour)
-        print "Model Building"
+        print("Model Building")
         self.model = FunctionSet(
             l1=F.Linear(input_vector_length, 500),
             l2=F.Linear(500, 250),
@@ -43,7 +43,7 @@ class DQN_class:
                                                dtype=np.float32))
         ).to_gpu()
 
-        print "Initizlizing Optimizer"
+        print("Initizlizing Optimizer")
         self.optimizer = optimizers.RMSpropGraves(lr=0.0002, alpha=0.3, momentum=0.2)
         self.optimizer.setup(self.model.collect_parameters())
 
@@ -138,10 +138,10 @@ class DQN_class:
 
         if np.random.rand() < epsilon:
             index_action = np.random.randint(0, self.num_of_actions)
-            print "RANDOM"
+            print("RANDOM")
         else:
             index_action = np.argmax(Q.get())
-            print "GREEDY"
+            print("GREEDY")
 
         return self.index_to_action(index_action), Q
     
