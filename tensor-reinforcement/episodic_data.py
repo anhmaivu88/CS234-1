@@ -1,6 +1,6 @@
 import sys  
 # reload(sys)  
-sys.setdefaultencoding('utf8')
+#sys.setdefaultencoding('utf8')
 
 import gzip
 import os
@@ -15,7 +15,7 @@ import numpy as np
 import dateutil.parser
 import pdb
 import glob
-import _pickle as pickle
+import pickle as pickle
 import shelve
 import six
 from six.moves.urllib import request
