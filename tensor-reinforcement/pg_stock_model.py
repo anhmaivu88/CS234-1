@@ -49,7 +49,7 @@ class PG():
             print("Could not find old network weights")
 
         global summary_writer
-        summary_writer = tf.train.SummaryWriter('logs',graph=self.session.graph)
+        summary_writer = tf.summary.FileWriter('logs',graph=self.session.graph)
 
     def create_pg_network(self, data_dictionary):
         # network weights
@@ -71,11 +71,11 @@ class PG():
         #this needs to be updated to use softmax
         #P_action = tf.reduce_sum(self.PG_value,reduction_indices = 1)
         #self.cost = tf.reduce_mean(tf.square(self.y_input - P_action))
-        self.cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(self.PG_value, self.y_input))
+        self.cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=self.PG_value, labels=self.y_input))
         #self.cost = tf.reduce_mean(-tf.reduce_sum(self.y_input * tf.log(self.PG_value), reduction_indices=[1]))
-        tf.scalar_summary("loss",self.cost)
+        tf.summary.scalar("loss",self.cost)
         global merged_summary_op
-        merged_summary_op = tf.merge_all_summaries()
+        merged_summary_op = tf.summary.merge_all()
         self.optimizer = tf.train.AdamOptimizer(LEARNING_RATE).minimize(self.cost)
 
     def create_supervised_accuracy(self):

@@ -51,7 +51,7 @@ class PG():
 
         # loading networks
         self.saver = tf.train.Saver()
-        checkpoint = tf.train.get_checkpoint_state("saved_networks")
+        checkpoint = tf.train.get_checkpoint_state("saved_networks_tmp")
         if checkpoint and checkpoint.model_checkpoint_path:
             self.saver.restore(self.session, checkpoint.model_checkpoint_path)
             print("Successfully loaded:", checkpoint.model_checkpoint_path)
@@ -59,7 +59,8 @@ class PG():
             print("Could not find old network weights")
 
         global summary_writer
-        summary_writer = tf.train.SummaryWriter('logs',graph=self.session.graph)
+        #summary_writer = tf.train.SummaryWriter('logs',graph=self.session.graph)
+        summary_writer = tf.summary.FileWriter('logs',graph=self.session.graph)
 
     def create_pg_network(self, weights, biases):
         # network weights
@@ -76,9 +77,10 @@ class PG():
         #self.cost = tf.reduce_mean(tf.square(self.y_input - P_action))
         #self.cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(self.PG_value, self.y_input))
         self.cost = tf.reduce_mean(-tf.reduce_sum(self.y_input * tf.log(self.PG_value), reduction_indices=[1]))
-        tf.scalar_summary("loss",self.cost)
+        #tf.scalar_summary("loss",self.cost)
+        tf.summary.scalar("loss",self.cost)
         global merged_summary_op
-        merged_summary_op = tf.merge_all_summaries()
+        merged_summary_op = tf.summary.merge_all()
         self.optimizer = tf.train.AdamOptimizer(LEARNING_RATE).minimize(self.cost)
 
     def perceive(self,states,epd):
