@@ -44,7 +44,10 @@ def prepare_data(path):
     for data in stock_data:
         # temp = [open, high, low, close, count]
         # dict_vector = temp + [average], but average is incorrect.
-        temp = [data[2], data[3], data[4], data[5], data[8]]
+        #temp = [data[2], data[3], data[4], data[5], data[8]]
+        #print(data)
+        #break
+        temp = [data[1], data[1], data[1], data[1], 1]
         average_dataset.append(temp)
         if index % 1000 == 13:
             print(index, len(average_dataset))

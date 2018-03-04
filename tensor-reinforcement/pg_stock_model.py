@@ -194,7 +194,8 @@ def main():
                     epr = np.vstack(reward_list)
                     discounted_epr = agent.discounted_rewards(epr)
                     discounted_epr -= np.mean(discounted_epr)
-                    discounted_epr /= np.std(discounted_epr)
+                    if np.std(discounted_epr) > 0:
+                        discounted_epr /= np.std(discounted_epr) 
                     epdlogp = np.vstack(grad_list)
                     agent.perceive(state_list, epdlogp)
                     if episode % BATCH_SIZE == 0 and episode > 1:
